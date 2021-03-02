@@ -46,8 +46,8 @@ CREATE TABLE compradores(
 cd_comprador INTEGER NOT NULL PRIMARY KEY auto_increment,
 nm_comprador VARCHAR(100) NOT NULL,
 nm_enderecoComprador VARCHAR(100) NOT NULL,
-nr_cpfComprador INTEGER NOT NULL,
-tel_comprador INTEGER NOT NULL,
+nr_cpfComprador VARCHAR(100) NOT NULL,
+tel_comprador VARCHAR(100) NOT NULL,
 cd_cidade INTEGER NOT NULL,
 cd_bairro INTEGER NOT NULL,
 sg_estado VARCHAR(2) NOT NULL,
@@ -65,8 +65,8 @@ CREATE TABLE vendedor(
 cd_vendedor INTEGER NOT NULL PRIMARY KEY auto_increment,
 nm_vendedor VARCHAR(100) NOT NULL,
 nm_endereco VARCHAR(100) NOT NULL,
-nr_cpfVendedor INTEGER NOT NULL,
-tel_vendedor INTEGER NOT NULL,
+nr_cpfVendedor VARCHAR(100) NOT NULL,
+tel_vendedor VARCHAR(100) NOT NULL,
 data_nascVendedor DATE NOT NULL,
 cd_cidade INTEGER NOT NULL,
 cd_bairro INTEGER NOT NULL,
@@ -90,6 +90,7 @@ Nr_areatotal DECIMAL(8,2) NOT NULL,
 vl_preco DECIMAL(10,2) NOT NULL,
 st_vendido VARCHAR(100) NOT NULL,
 data_lancto DATE NOT NULL,
+cd_comprador INTEGER NOT NULL,
 cd_vendedor INTEGER NOT NULL,
 cd_bairro INTEGER NOT NULL,
 cd_cidade INTEGER NOT NULL,
@@ -100,7 +101,11 @@ REFERENCES vendedor(cd_vendedor),
 FOREIGN KEY (cd_bairro)
 REFERENCES bairro(cd_bairro),
 FOREIGN KEY (sg_estado)
-REFERENCES estado(sg_estado)
+REFERENCES estado(sg_estado),
+FOREIGN KEY(cd_comprador)
+REFERENCES compradores(cd_comprador),
+FOREIGN KEY (cd_cidade)
+REFERENCES cidade(cd_cidade)
 
 );
 
@@ -108,7 +113,7 @@ CREATE TABLE oferta(
 
 cd_oferta INTEGER NOT NULL PRIMARY KEY auto_increment,
 vl_oferta DECIMAL(8,2) NOT NULL,
-dt_oferta DATETIME NOT NULL,
+dt_oferta DATE,
 cd_imovel INTEGER NOT NULL,
 cd_comprador INTEGER NOT NULL,
 FOREIGN KEY (cd_comprador)
@@ -241,9 +246,7 @@ INSERT INTO cidade (nm_cidade, sg_estado) VALUES
 ('Brazlândia', 'DF'),
 ('Candangolândia', 'DF');
 
-select cd_cidade, sg_estado from cidade order by cd_cidade;
 
-select * from bairro;
 
 INSERT INTO bairro(nm_bairro, sg_estado, cd_cidade) VALUES
 ('Abraão Alab', 'AC', '1'),
@@ -492,4 +495,34 @@ INSERT INTO bairro(nm_bairro, sg_estado, cd_cidade) VALUES
 
 
 
+INSERT INTO compradores (cd_comprador, nm_comprador, nm_enderecoComprador, nr_cpfComprador, tel_comprador, cd_cidade, cd_bairro, sg_estado) VALUES
+('1', 'Gustavo de Melo', 'Rua Pedro Alvares Cabaral', '111.111.111-11', '1111-1111', 70, 210, 'SP'),
+('2', 'Jonathan Pereira', 'Rua Domingues', '222.222.222-22', '2222-2222', 81, 243, 'DF'),
+('3', 'Carlos Eduardo', 'Rua Presidente', '333.333.333-33', '3333-3333', 23, 67, 'GO'),
+('4', 'Lucas Albuquerque', 'Rua Cabloco', '444.444.444-44', '4444-4444', 28, 84, 'MT'),
+('5', 'Nicole Barros', 'Rua Pompeia', '555.555.555-55', '5555-5555', 31, 92, 'MS'),
+('6', 'Alexandre Silva', 'Rua Sol', '666.666.666-66', '6666-6666', 37, 110, 'PA'),
+('7', 'Aline Constantino', 'Rua Tarsília do Amaral', '7777.777.777-77', '7777-7777', 42, 126, 'PR'),
+('8', 'Bruno Henrique', 'Rua Luar', '888.888.888-88', '8888-8888', 49, 145, 'PI'),
+('9', 'Kayc Santana', 'Rua Imperial', '999.999.999-99', '9999-9999', 52, 154, 'RJ'),
+('10', 'Rodrigo Caetano', 'Rua Elenice', '101.101.101-10', '1010-1010', 56, 167, 'RN');
+
+
+INSERT INTO vendedor(nm_vendedor, nm_endereco, nr_cpfVendedor, tel_vendedor, data_nascVendedor, cd_cidade, cd_bairro, sg_estado) VALUES
+('Gabriel Mendes', 'Rua Camundongo', '000.000.000-00', '0000-0000', '1984-07-02', 1, 1, 'AC'),
+('Kamila Alves', 'Rua Broto', '010.010.010.01', '0101-0101', '2000-12-24', 80, 241, 'DF'),
+('Clodoaldo', 'Rua Vasconcelos', '020.020.020-02', '0202-0202', '1996-05-08', 73, 218, 'SE'),
+('Nathan Monaco', 'Rua Tribalista', '030.030.030-03', '0303-0303', '2002-03-06', 63, 187, 'RO'),
+('Yago Machado', 'Rua Joy', '040.040.040-04', '0404-0404', '1959-06-21', 7, 20, 'AL'),
+('Igor Menezes', 'Rua Paulista', '050.050.050-05', '0505-0505', '1972-01-30', 14, 41, 'BA'),
+('Joelma Barros', 'Rua Paulo Pereira', '060.060.060-06', '0606-0606', '2001-01-01', 15, 44, 'BA'),
+('Renan Gabriel', 'Rua Esmeralda', '070.070.070-07', '0707-0707', '2002-05-26', 39, 116, 'PA'),
+('Rodrigo Caldeira', 'Rua Pôr do Sol', '080.080.080-08', '0707-0707', '1974-09-07', 59, 177, 'RS'),
+('Tales Almeida', 'Rua Oligarquia', '090.090.090-09', '0707-0707', '1992-12-20', 56, 167, 'RN');
+
+INSERT INTO 
+faixa_imovel(nm_faixa, vl_minimo, vl_maximo) VALUES
+('Baixo', 0.00, 10500.00),
+('Médio', 105001.00, 180000.00),
+('Alto', 180001.00, 999999.00);
 
