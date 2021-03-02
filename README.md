@@ -1,2 +1,2 @@
-# Cursos
- Repositório do aprendizado de diferentes linguagens de programação
+# Portifólio
+ Um repositório dedicado ao aprendizado de diferentes linguagens de programação.
