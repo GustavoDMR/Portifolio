@@ -1,4 +1,5 @@
 # **Portifólio**
- Um repositório dedicado ao aprendizado de diferentes linguagens.
+ ---
+ Um _repositório_ dedicado ao aprendizado de diferentes linguagens.
 
  ...
