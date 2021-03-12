@@ -83,7 +83,7 @@ REFERENCES estado(sg_estado)
 
 CREATE TABLE imovel(
 
-cd_imovel INTEGER NOT NULL PRIMARY KEY auto_increment,
+cd_imovel INTEGER NULL PRIMARY KEY auto_increment,
 nm_endereco VARCHAR(100) NOT NULL,
 nr_areautil DECIMAL(8,2) NOT NULL,
 Nr_areatotal DECIMAL(8,2) NOT NULL,
@@ -111,25 +111,21 @@ REFERENCES cidade(cd_cidade)
 
 CREATE TABLE oferta(
 
-cd_oferta INTEGER NOT NULL PRIMARY KEY auto_increment,
+cd_oferta INTEGER NULL PRIMARY KEY auto_increment,
 vl_oferta DECIMAL(8,2) NOT NULL,
 dt_oferta DATE,
 cd_imovel INTEGER NOT NULL,
 cd_comprador INTEGER NOT NULL,
 FOREIGN KEY (cd_comprador)
-REFERENCES compradores(cd_comprador)
+REFERENCES compradores(cd_comprador),
+FOREIGN KEY (cd_imovel)
+REFERENCES imovel(cd_imovel)
 
 );
-
-ALTER TABLE oferta
-ADD FOREIGN KEY (cd_imovel)
-REFERENCES imovel(cd_imovel);
 
 ALTER TABLE imovel
 ADD FOREIGN KEY(cd_oferta)
 REFERENCES oferta(cd_oferta);
-
-
 
 
 INSERT INTO estado (sg_estado, nm_estado) VALUES 
@@ -495,17 +491,17 @@ INSERT INTO bairro(nm_bairro, sg_estado, cd_cidade) VALUES
 
 
 
-INSERT INTO compradores (cd_comprador, nm_comprador, nm_enderecoComprador, nr_cpfComprador, tel_comprador, cd_cidade, cd_bairro, sg_estado) VALUES
-('1', 'Gustavo de Melo', 'Rua Pedro Alvares Cabaral', '111.111.111-11', '1111-1111', 70, 210, 'SP'),
-('2', 'Jonathan Pereira', 'Rua Domingues', '222.222.222-22', '2222-2222', 81, 243, 'DF'),
-('3', 'Carlos Eduardo', 'Rua Presidente', '333.333.333-33', '3333-3333', 23, 67, 'GO'),
-('4', 'Lucas Albuquerque', 'Rua Cabloco', '444.444.444-44', '4444-4444', 28, 84, 'MT'),
-('5', 'Nicole Barros', 'Rua Pompeia', '555.555.555-55', '5555-5555', 31, 92, 'MS'),
-('6', 'Alexandre Silva', 'Rua Sol', '666.666.666-66', '6666-6666', 37, 110, 'PA'),
-('7', 'Aline Constantino', 'Rua Tarsília do Amaral', '7777.777.777-77', '7777-7777', 42, 126, 'PR'),
-('8', 'Bruno Henrique', 'Rua Luar', '888.888.888-88', '8888-8888', 49, 145, 'PI'),
-('9', 'Kayc Santana', 'Rua Imperial', '999.999.999-99', '9999-9999', 52, 154, 'RJ'),
-('10', 'Rodrigo Caetano', 'Rua Elenice', '101.101.101-10', '1010-1010', 56, 167, 'RN');
+INSERT INTO compradores (nm_comprador, nm_enderecoComprador, nr_cpfComprador, tel_comprador, cd_cidade, cd_bairro, sg_estado) VALUES
+('Gustavo de Melo', 'Rua Pedro Alvares Cabaral', '111.111.111-11', '1111-1111', 70, 210, 'SP'),
+('Jonathan Pereira', 'Rua Domingues', '222.222.222-22', '2222-2222', 81, 243, 'DF'),
+('Carlos Eduardo', 'Rua Presidente', '333.333.333-33', '3333-3333', 23, 67, 'GO'),
+('Lucas Albuquerque', 'Rua Cabloco', '444.444.444-44', '4444-4444', 28, 84, 'MT'),
+('Nicole Barros', 'Rua Pompeia', '555.555.555-55', '5555-5555', 31, 92, 'MS'),
+('Alexandre Silva', 'Rua Sol', '666.666.666-66', '6666-6666', 37, 110, 'PA'),
+('Aline Constantino', 'Rua Tarsília do Amaral', '7777.777.777-77', '7777-7777', 42, 126, 'PR'),
+('Bruno Henrique', 'Rua Luar', '888.888.888-88', '8888-8888', 49, 145, 'PI'),
+('Kayc Santana', 'Rua Imperial', '999.999.999-99', '9999-9999', 52, 154, 'RJ'),
+('Rodrigo Caetano', 'Rua Elenice', '101.101.101-10', '1010-1010', 56, 167, 'RN');
 
 
 INSERT INTO vendedor(nm_vendedor, nm_endereco, nr_cpfVendedor, tel_vendedor, data_nascVendedor, cd_cidade, cd_bairro, sg_estado) VALUES
@@ -520,9 +516,20 @@ INSERT INTO vendedor(nm_vendedor, nm_endereco, nr_cpfVendedor, tel_vendedor, dat
 ('Rodrigo Caldeira', 'Rua Pôr do Sol', '080.080.080-08', '0707-0707', '1974-09-07', 59, 177, 'RS'),
 ('Tales Almeida', 'Rua Oligarquia', '090.090.090-09', '0707-0707', '1992-12-20', 56, 167, 'RN');
 
+
+
+
 INSERT INTO 
 faixa_imovel(nm_faixa, vl_minimo, vl_maximo) VALUES
 ('Baixo', 0.00, 10500.00),
 ('Médio', 105001.00, 180000.00),
 ('Alto', 180001.00, 999999.00);
 
+
+INSERT INTO
+imovel(nm_endereco,nr_areautil,Nr_areatotal,vl_preco,st_vendido,data_lancto,cd_comprador,cd_vendedor,cd_bairro,cd_cidade,sg_estado, cd_oferta) VALUES
+('Anita Garibaldi', 100000.00, 200000.00, 40000000.00, 'Á venda', '2007-02-21', 3, 3, 204, 68, 'SC', 1);
+
+INSERT INTO 
+oferta(vl_oferta,dt_oferta,cd_imovel,cd_comprador) VALUES
+(500000.00,'2008-05-04', 1, 1);
