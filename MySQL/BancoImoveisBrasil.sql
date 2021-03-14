@@ -1,5 +1,6 @@
 create database BDimovel;
 use BDimovel;
+set foreign_key_checks = 0;
 
 CREATE TABLE faixa_imovel(
 
@@ -528,8 +529,10 @@ faixa_imovel(nm_faixa, vl_minimo, vl_maximo) VALUES
 
 INSERT INTO
 imovel(nm_endereco,nr_areautil,Nr_areatotal,vl_preco,st_vendido,data_lancto,cd_comprador,cd_vendedor,cd_bairro,cd_cidade,sg_estado, cd_oferta) VALUES
-('Anita Garibaldi', 100000.00, 200000.00, 40000000.00, 'Á venda', '2007-02-21', 3, 3, 204, 68, 'SC', 1);
+('Anita Garibaldi', 100000.00, 200000.00, 40000000.00, 'Á venda', '2007-02-21', 3, 3, 204, 68, 'SC', 1),
+('Pinheiros', 700000.00, 200.00, 400.00, 'Á venda', '2019-05-12', 1, 4, 208, 70, 'SP', 2);
 
 INSERT INTO 
 oferta(vl_oferta,dt_oferta,cd_imovel,cd_comprador) VALUES
-(500000.00,'2008-05-04', 1, 1);
+(500000.00,'2008-05-04', 1, 1),
+(2000.00, '2019-06-01', 2, 1);
