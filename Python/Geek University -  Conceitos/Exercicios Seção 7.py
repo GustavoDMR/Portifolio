@@ -338,8 +338,6 @@ print(lista3)
 
 # exercicio 22
 
-
-
 lista1 = []
 lista2 = []
 lista3 = []
