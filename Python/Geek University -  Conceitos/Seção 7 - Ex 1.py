@@ -10,7 +10,7 @@ Operações com vetores
 # exercicio 1
 
 
-vetor = [1, 0, 5, -1, -5, 7]
+vetor = [1, 0, 5, -1, -5, 9]
 print('O vetor atual é: ', vetor, end='\n')
 
 total = vetor[0] + vetor[1] + vetor[4]  # soma de vetores
